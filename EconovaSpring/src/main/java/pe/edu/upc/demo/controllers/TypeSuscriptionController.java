@@ -1,12 +1,9 @@
 package pe.edu.upc.demo.controllers;
-
 /*import java.io.IOException;*/
 import java.net.MalformedURLException;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -21,11 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import pe.edu.upc.demo.entities.TypeSuscription;
 import pe.edu.upc.demo.serviceinterface.ITypeSuscriptionService;
 import pe.edu.upc.demo.serviceinterface.IUploadFileService;
-
 @Controller
 @RequestMapping("/typesuscription")
 public class TypeSuscriptionController {
@@ -111,7 +106,6 @@ public class TypeSuscriptionController {
 			model.addAttribute("mensaje", "Se Actualizo correctamente!!");
 			return "redirect:/typesuscription/list";
 		}
-
 	}
 
 	@GetMapping(value = "/ver/{id}")
@@ -133,5 +127,4 @@ public class TypeSuscriptionController {
 		model.put("cantidadSusXempresas", tyService.CantidadSuscripcionesXEmpresa());
 		return "typesuscription/vista";
 	}
-
 }
