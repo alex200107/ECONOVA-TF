@@ -19,13 +19,11 @@ import pe.edu.upc.demo.serviceinterface.IVaccineService;
 public class VaccineController {
 	@Autowired
 	private IVaccineService vaService;
-
 	@GetMapping("/new")
 	public String newVaccine(Model model) {
 		model.addAttribute("v", new Vaccine());
 		return "vaccine/frmRegister";
 	}
-
 	@PostMapping("/save")
 	public String saveCustomer(@Valid @ModelAttribute("v") Vaccine vac, BindingResult binRes, Model model) {
 		if (binRes.hasErrors()) {
@@ -36,7 +34,6 @@ public class VaccineController {
 			return "redirect:/vaccine/new";
 		}
 	}
-
 	@GetMapping("/list")
 	public String listVaccine(Model model) {
 		try {
@@ -44,10 +41,8 @@ public class VaccineController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-
 		return "/vaccine/frmList";
 	}
-
 	@RequestMapping("/delete")
 	public String deleteVaccine(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
