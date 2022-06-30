@@ -1,7 +1,5 @@
 package pe.edu.upc.demo.entities;
-
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
 @Entity
 @Table(name = "users")
 public class Users {
@@ -103,5 +100,4 @@ public class Users {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-
 }
