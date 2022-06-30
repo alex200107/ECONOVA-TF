@@ -16,82 +16,81 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pe.edu.upc.demo.entities.Camion;
-import pe.edu.upc.demo.serviceinterface.ICamionService;
-import pe.edu.upc.demo.serviceinterface.IDriverService;
+import pe.edu.upc.demo.entities.Empresa;
+import pe.edu.upc.demo.serviceinterface.ICompanyService;
+import pe.edu.upc.demo.serviceinterface.ITypeSuscriptionService;
 
 @Controller
-@RequestMapping("/camion")
-public class CamionController {
+@RequestMapping("/company")
+public class CompanyController {
 	@Autowired
-	private ICamionService camionService;
+	private ICompanyService comService;
 	@Autowired
-	private IDriverService driService;
+	private ITypeSuscriptionService typService;
 
 	@GetMapping("/new")
-	public String newCamion(Model model) {
-		model.addAttribute("c", new Camion());
-		model.addAttribute("listDriver", driService.list());
-		return "camion/frmRegister";
+	public String newCompany(Model model) {
+		model.addAttribute("c", new Empresa());
+		model.addAttribute("listtypesuscription", typService.list());
+		return "company/frmRegister";
 	}
 
 	@PostMapping("/save")
-	public String saveCamion(@Valid @ModelAttribute("c") Camion cam, BindingResult binRes, Model model) {
+	public String saveCompany(@Valid @ModelAttribute("c") Empresa com, BindingResult binRes, Model model) {
 		if (binRes.hasErrors()) {
-			model.addAttribute("listDriver", driService.list());
-			return "camion/frmRegister";
+			model.addAttribute("listtypesuscription", typService.list());
+			return "company/frmRegister";
 		} else {
-			camionService.Insert(cam);
+			comService.Insert(com);
 			model.addAttribute("mensaje", "Se registro correctamente!!");
-			return "redirect:/camion/new";
+			return "redirect:/company/new";
 		}
 	}
 
 	@GetMapping("/list")
-	public String listCamion(Model model) {
+	public String listCompany(Model model) {
 		try {
-			model.addAttribute("listCamion", camionService.list());
+			model.addAttribute("listCompany", comService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "/camion/frmList";
+		return "/company/frmList";
 	}
 
 	@RequestMapping("/delete")
-	public String deleteCamion(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String deleteCompany(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
-				camionService.delete(id);
-				model.put("listCamion", camionService.list());
-				return "camion/frmList";
+				comService.delete(id);
+				model.put("listCompany", comService.list());
+				return "company/frmList";
 			}
 		} catch (Exception e) {
 			model.put("error", e.getMessage());
 		}
-		return "camion/frmList";
+		return "company/frmList";
 	}
 
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model) {
-
-		Optional<Camion> objPer = camionService.listarId(id);
-		model.addAttribute("ca", objPer.get());
-		model.addAttribute("listDriver", driService.list());
-		return "camion/frmUpdate";
+		Optional<Empresa> objPer = comService.listarId(id);
+		model.addAttribute("listtypesuscription", typService.list());
+		model.addAttribute("co", objPer.get());
+		return "company/frmUpdate";
 	}
 
 	@PostMapping("/actualizar")
-	public String actualizar(@Valid @ModelAttribute("ca") Camion cami, BindingResult binRes, Model model) {
-
+	public String actualizar(@Valid @ModelAttribute("co") Empresa emp, BindingResult binRes, Model model) {
 		if (binRes.hasErrors()) {
-			model.addAttribute("listDriver", driService.list());
-			return "camion/frmUpdate";
+			model.addAttribute("listtypesuscription", typService.list());
+			return "company/frmUpdate";
 		} else {
-			camionService.modificar(cami);
+			comService.modificar(emp);
 			model.addAttribute("mensaje", "Se Actualizo correctamente!!");
-			return "redirect:/camion/list";
+			return "redirect:/company/list";
 		}
+
 	}
 
 }
