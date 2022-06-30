@@ -12,3 +12,4 @@ public interface IListVaccinationService {
 	public void modificar(ListVaccination Listvaccination);
 	Optional<ListVaccination> listarId(int idListvaccination);
 }
+
