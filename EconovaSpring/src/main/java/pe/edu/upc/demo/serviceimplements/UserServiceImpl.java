@@ -29,7 +29,4 @@ public class UserServiceImpl implements IUserService {
 	public Optional<Users> listarId(Long idUser) {
 		return tR.findById(idUser);
 	}
-
-	
-
 }
