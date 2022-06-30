@@ -39,7 +39,6 @@ public class ServiceController {
 
 		return "service/frmRegister";
 	}
-
 	@PostMapping("/save")
 	public String saveService(@Valid @ModelAttribute("s") Service se, BindingResult binRes, Model model) {
 		if (binRes.hasErrors()) {
@@ -58,7 +57,6 @@ public class ServiceController {
 			return "redirect:/service/new";
 		}
 	}
-
 	@GetMapping("/list")
 	public String listService(Model model) {
 		try {
@@ -69,7 +67,6 @@ public class ServiceController {
 
 		return "/service/frmList";
 	}
-
 	@RequestMapping("/delete")
 	public String deleteService(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
@@ -83,7 +80,6 @@ public class ServiceController {
 		}
 		return "service/frmList";
 	}
-
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model) {
 
@@ -93,7 +89,6 @@ public class ServiceController {
 		model.addAttribute("listCompany", comService.list());
 		return "service/frmUpdate";
 	}
-
 	@PostMapping("/actualizar")
 	public String actualizar(@Valid @ModelAttribute("se") Service ser, BindingResult binRes, Model model) {
 		if (binRes.hasErrors()) {
@@ -107,11 +102,9 @@ public class ServiceController {
 		}
 
 	}
-
 	@RequestMapping("/reporte1")
 	public String tipoDesechocantidad(Map<String, Object> model) {
 		model.put("tipodesechocantidad", seService.tipodesechocantidad());
 		return "service/vista";
 	}
-
 }
