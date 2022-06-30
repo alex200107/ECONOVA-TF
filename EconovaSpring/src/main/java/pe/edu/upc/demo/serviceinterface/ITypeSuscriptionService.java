@@ -1,10 +1,7 @@
 package pe.edu.upc.demo.serviceinterface;
-
 import java.util.List;
 import java.util.Optional;
-
 import pe.edu.upc.demo.entities.TypeSuscription;
-
 public interface ITypeSuscriptionService {
 	public void Insert(TypeSuscription typesuscription);
 	public List<TypeSuscription> list();
