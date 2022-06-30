@@ -16,81 +16,83 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pe.edu.upc.demo.entities.Empresa;
-import pe.edu.upc.demo.serviceinterface.ICompanyService;
-import pe.edu.upc.demo.serviceinterface.ITypeSuscriptionService;
+import pe.edu.upc.demo.entities.Camion;
+import pe.edu.upc.demo.serviceinterface.ICamionService;
+import pe.edu.upc.demo.serviceinterface.IDriverService;
 
 @Controller
-@RequestMapping("/company")
-public class CompanyController {
+@RequestMapping("/camion")
+public class CamionController {
 	@Autowired
-	private ICompanyService comService;
+	private ICamionService camionService;
 	@Autowired
-	private ITypeSuscriptionService typService;
+	private IDriverService driService;
 
 	@GetMapping("/new")
-	public String newCompany(Model model) {
-		model.addAttribute("c", new Empresa());
-		model.addAttribute("listtypesuscription", typService.list());
-		return "company/frmRegister";
+	public String newCamion(Model model) {
+		model.addAttribute("c", new Camion());
+		model.addAttribute("listDriver", driService.list());
+		return "camion/frmRegister";
 	}
 
 	@PostMapping("/save")
-	public String saveCompany(@Valid @ModelAttribute("c") Empresa com, BindingResult binRes, Model model) {
+	public String saveCamion(@Valid @ModelAttribute("c") Camion cam, BindingResult binRes, Model model) {
 		if (binRes.hasErrors()) {
-			model.addAttribute("listtypesuscription", typService.list());
-			return "company/frmRegister";
+			model.addAttribute("listDriver", driService.list());
+			return "camion/frmRegister";
 		} else {
-			comService.Insert(com);
+			camionService.Insert(cam);
 			model.addAttribute("mensaje", "Se registro correctamente!!");
-			return "redirect:/company/new";
+			return "redirect:/camion/new";
 		}
 	}
 
 	@GetMapping("/list")
-	public String listCompany(Model model) {
+	public String listCamion(Model model) {
 		try {
-			model.addAttribute("listCompany", comService.list());
+			model.addAttribute("listCamion", camionService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "/company/frmList";
+		return "/camion/frmList";
 	}
 
 	@RequestMapping("/delete")
-	public String deleteCompany(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String deleteCamion(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
-				comService.delete(id);
-				model.put("listCompany", comService.list());
-				return "company/frmList";
+				camionService.delete(id);
+				model.put("listCamion", camionService.list());
+				return "camion/frmList";
 			}
 		} catch (Exception e) {
 			model.put("error", e.getMessage());
 		}
-		return "company/frmList";
+		return "camion/frmList";
 	}
 
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model) {
-		Optional<Empresa> objPer = comService.listarId(id);
-		model.addAttribute("listtypesuscription", typService.list());
-		model.addAttribute("co", objPer.get());
-		return "company/frmUpdate";
+
+		Optional<Camion> objPer = camionService.listarId(id);
+		model.addAttribute("ca", objPer.get());
+		model.addAttribute("listDriver", driService.list());
+		return "camion/frmUpdate";
 	}
 
 	@PostMapping("/actualizar")
-	public String actualizar(@Valid @ModelAttribute("co") Empresa emp, BindingResult binRes, Model model) {
-		if (binRes.hasErrors()) {
-			model.addAttribute("listtypesuscription", typService.list());
-			return "company/frmUpdate";
-		} else {
-			comService.modificar(emp);
-			model.addAttribute("mensaje", "Se Actualizo correctamente!!");
-			return "redirect:/company/list";
-		}
+	public String actualizar(@Valid @ModelAttribute("ca") Camion cami, BindingResult binRes, Model model) {
 
+		if (binRes.hasErrors()) {
+			model.addAttribute("listDriver", driService.list());
+			return "camion/frmUpdate";
+		} else {
+			camionService.modificar(cami);
+			model.addAttribute("mensaje", "Se Actualizo correctamente!!");
+			return "redirect:/camion/list";
+		}
 	}
 
 }
+
