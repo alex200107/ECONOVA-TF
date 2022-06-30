@@ -1,11 +1,8 @@
 package pe.edu.upc.demo.controllers;
-
 import java.text.ParseException;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import pe.edu.upc.demo.entities.Role;
 import pe.edu.upc.demo.serviceinterface.IRoleService;
 import pe.edu.upc.demo.serviceinterface.IUserService;
-
 @Controller
 @RequestMapping("/roles")
 public class RoleController {
-
 	@Autowired
 	private IRoleService rService;
 	@Autowired
@@ -35,7 +29,6 @@ public class RoleController {
 		model.addAttribute("listaUsuarios", uService.listar());
 		return "role/role";		
 	}
-
 	@PostMapping("/guardar")
 	public String registrarRole(@Valid Role objTel, BindingResult binRes, Model model) throws ParseException {
 		if (binRes.hasErrors()) {
@@ -47,7 +40,6 @@ public class RoleController {
 			return "redirect:/roles/listar";
 		}
 	}
-
 	@GetMapping("/listar")
 	public String listarRoles(Model model) {
 		try {
@@ -57,7 +49,6 @@ public class RoleController {
 		}
 		return "/role/listaRole";
 	}
-	
 	@RequestMapping("/delete")
 	public String deleteService(Map<String, Object> model, @RequestParam(value = "id") Long id) {
 		try {
@@ -71,8 +62,6 @@ public class RoleController {
 		}
 		return "role/listaRole";
 	}
-
-	
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable long id, Model model) {
 
@@ -81,7 +70,6 @@ public class RoleController {
 		model.addAttribute("ro", objPer.get());
 		return "role/frmUpdate";
 	}
-
 	@PostMapping("/actualizar")
 	public String actualizar(Role rol, BindingResult binRes, Model model) {
 		if (binRes.hasErrors()) {
