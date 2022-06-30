@@ -1,7 +1,5 @@
 package pe.edu.upc.demo.entities;
-
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +12,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
 @Table(name = "Vaccine")
 public class Vaccine {
@@ -38,7 +34,6 @@ public class Vaccine {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "dateExpiration",nullable = false)
 	private Date dateExpiration;
-	
 	public Vaccine() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -53,31 +48,24 @@ public class Vaccine {
 		this.dateFrabication = dateFrabication;
 		this.dateExpiration = dateExpiration;
 	}
-
 	public int getIdVaccine() {
 		return idVaccine;
 	}
-
 	public void setIdVaccine(int idVaccine) {
 		this.idVaccine = idVaccine;
 	}
-
 	public String getDescriptionVaccine() {
 		return descriptionVaccine;
 	}
-
 	public void setDescriptionVaccine(String descriptionVaccine) {
 		this.descriptionVaccine = descriptionVaccine;
 	}
-
 	public Date getDateFrabication() {
 		return dateFrabication;
 	}
-
 	public void setDateFrabication(Date dateFrabication) {
 		this.dateFrabication = dateFrabication;
 	}
-
 	public Date getDateExpiration() {
 		return dateExpiration;
 	}
