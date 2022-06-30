@@ -14,3 +14,4 @@ public interface IServiceRepository extends JpaRepository<Service, Integer> {
 	@Query(value = "select e.name_company, sum(s.quantity_waste) from company e inner join service s on e.id_company = s.id_company group by e.name_company", nativeQuery = true)
 	public List<String[]> tipodesechocantidad();
 }
+
