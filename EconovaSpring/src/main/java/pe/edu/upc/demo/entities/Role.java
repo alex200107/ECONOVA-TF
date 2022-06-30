@@ -62,5 +62,4 @@ public class Role implements Serializable {
 	public void setUser(Users user) {
 		this.user = user;
 	}
-
 }
