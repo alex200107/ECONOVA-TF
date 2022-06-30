@@ -12,3 +12,4 @@ public interface IReportService {
 	public void modificar(Report report);
 	Optional<Report> listarId(int idReport);
 }
+
