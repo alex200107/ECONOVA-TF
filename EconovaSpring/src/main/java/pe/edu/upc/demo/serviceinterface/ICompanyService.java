@@ -12,3 +12,4 @@ public interface ICompanyService {
 	public void modificar(Empresa company);
 	Optional<Empresa> listarId(int idCompany);
 }
+
